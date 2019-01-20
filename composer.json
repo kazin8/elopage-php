@@ -1,0 +1,23 @@
+{
+    "name": "kazin8/elopage-php",
+    "description": "Elopage API php wrapper",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir Vasyukov",
+            "email": "kazin8@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^5.3 || ^7.0",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kazin8\\Elopage\\": "src/"
+        }
+    }
+}
