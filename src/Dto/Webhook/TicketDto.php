@@ -2,10 +2,19 @@
 
 namespace Kazin8\Elopage\Dto\Webhook;
 
-class TicketDto extends BaseDto
+use Kazin8\Elopage\Dto\AbstractDto;
+
+class TicketDto extends AbstractDto
 {
     protected $count;
     protected $codes = [];
+
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
+        $this->setCodes($data['codes']);
+    }
 
     /**
      * @return mixed

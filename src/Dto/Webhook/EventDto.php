@@ -2,7 +2,9 @@
 
 namespace Kazin8\Elopage\Dto\Webhook;
 
-class EventDto extends BaseDto
+use Kazin8\Elopage\Dto\AbstractDto;
+
+class EventDto extends AbstractDto
 {
     protected $id;
     protected $name;

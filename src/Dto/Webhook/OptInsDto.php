@@ -2,7 +2,9 @@
 
 namespace Kazin8\Elopage\Dto\Webhook;
 
-class OptInsDto extends BaseDto
+use Kazin8\Elopage\Dto\AbstractDto;
+
+class OptInsDto extends AbstractDto
 {
     protected $questionId;
     protected $question;

@@ -1,17 +1,20 @@
 <?php
 
-namespace Kazin8\Elopage\Dto\Webhook;
+namespace Kazin8\Elopage\Dto;
 
-class BaseDto
+abstract class AbstractDto
 {
     public function __construct(array $data = [])
     {
         if ($data) {
             foreach ($data as $key => $value) {
-                $method = "set{$this->snakeToCamel($key)}";
-                if (method_exists($this, $method)) {
-                    $this->$method($value);
+                if (!is_array($value)) {
+                    $method = "set{$this->snakeToCamel($key)}";
+                    if (method_exists($this, $method)) {
+                        $this->$method($value);
+                    }
                 }
+
             }
         }
     }

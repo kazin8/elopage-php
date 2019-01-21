@@ -2,22 +2,11 @@
 
 namespace Kazin8\Elopage\Dto;
 
-class ErrorDto
+class ErrorDto extends AbstractDto
 {
     protected $message;
     protected $code;
     protected $httpCode;
-
-    public function __construct(array $params)
-    {
-        $has = get_object_vars($this);
-        foreach ($has as $key => $value) {
-            $method = 'set'.ucfirst($key);
-            if (method_exists($this, $method)) {
-                $this->$method(isset($params[$key]) ? $params[$key] : null);
-            }
-        }
-    }
 
     /**
      * @return mixed

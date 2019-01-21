@@ -2,7 +2,7 @@
 
 namespace Kazin8\Elopage\Dto;
 
-class ResponseDto
+class ResponseDto extends AbstractDto
 {
     protected $data;
     protected $success = false;

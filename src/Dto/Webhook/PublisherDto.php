@@ -2,7 +2,9 @@
 
 namespace Kazin8\Elopage\Dto\Webhook;
 
-class PublisherDto extends BaseDto
+use Kazin8\Elopage\Dto\AbstractDto;
+
+class PublisherDto extends AbstractDto
 {
     protected $id;
     protected $email;

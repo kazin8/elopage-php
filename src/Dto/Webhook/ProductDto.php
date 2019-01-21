@@ -2,7 +2,9 @@
 
 namespace Kazin8\Elopage\Dto\Webhook;
 
-class ProductDto extends BaseDto
+use Kazin8\Elopage\Dto\AbstractDto;
+
+class ProductDto extends AbstractDto
 {
     protected $id;
     protected $slug;

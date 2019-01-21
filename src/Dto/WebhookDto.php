@@ -2,14 +2,19 @@
 
 namespace Kazin8\Elopage\Dto;
 
+use Kazin8\Elopage\Dto\Webhook\AuthorCommissionDto;
+use Kazin8\Elopage\Dto\Webhook\AuthorDto;
+use Kazin8\Elopage\Dto\Webhook\EventDto;
 use Kazin8\Elopage\Dto\Webhook\GiftReceiverDto;
+use Kazin8\Elopage\Dto\Webhook\OptInsDto;
 use Kazin8\Elopage\Dto\Webhook\PayerDto;
 use Kazin8\Elopage\Dto\Webhook\PricingPlanDto;
 use Kazin8\Elopage\Dto\Webhook\ProductDto;
 use Kazin8\Elopage\Dto\Webhook\PublisherDto;
+use Kazin8\Elopage\Dto\Webhook\TicketDto;
 use Kazin8\Elopage\Dto\Webhook\UpsellDto;
 
-class WebhookDto
+class WebhookDto extends AbstractDto
 {
     protected $id;
     protected $action;
@@ -70,8 +75,45 @@ class WebhookDto
 
     public function __construct(array $data = [])
     {
-        if ($data) {
+        parent::__construct($data);
 
+        if ($data) {
+            $this
+                ->setPayer(new PayerDto($data['payer'] ?? []))
+                ->setPublisher(new PublisherDto($data['publisher'] ?? []))
+                ->setProduct(new ProductDto($data['product'] ?? []))
+                ->setPricingPlan(new PricingPlanDto($data['pricing_plan'] ?? []))
+                ->setUpsell(new UpsellDto($data['upsell'] ?? []));
+
+            if (isset($data['authors'])) {
+                foreach ($data['authors'] as $author) {
+                    $this->addAuthor(new AuthorDto($author));
+                }
+            }
+
+            if (isset($data['events'])) {
+                foreach ($data['events'] as $event) {
+                    $this->addEvent(new EventDto($event));
+                }
+            }
+
+            if (isset($data['tickets'])) {
+                foreach ($data['tickets'] as $ticket) {
+                    $this->addTicket(new TicketDto($ticket));
+                }
+            }
+
+            if (isset($data['opt_ins'])) {
+                foreach ($data['opt_ins'] as $optIn) {
+                    $this->addOptIns(new OptInsDto($optIn));
+                }
+            }
+
+            if (isset($data['author_commissions'])) {
+                foreach ($data['author_commissions'] as $authorCommission) {
+                    $this->addAuthorCommissions(new AuthorCommissionDto($authorCommission));
+                }
+            }
         }
     }
 
@@ -696,6 +738,18 @@ class WebhookDto
     }
 
     /**
+     * @param AuthorDto $author
+     *
+     * @return self
+     */
+    public function addAuthor(AuthorDto $author): self
+    {
+        $this->authors[] = $author;
+
+        return $this;
+    }
+
+    /**
      * @return ProductDto
      */
     public function getProduct(): ProductDto
@@ -776,6 +830,18 @@ class WebhookDto
     }
 
     /**
+     * @param EventDto $event
+     *
+     * @return self
+     */
+    public function addEvent(EventDto $event): self
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getTickets(): array
@@ -791,6 +857,18 @@ class WebhookDto
     public function setTickets(array $tickets): self
     {
         $this->tickets = $tickets;
+
+        return $this;
+    }
+
+    /**
+     * @param TicketDto $ticket
+     *
+     * @return self
+     */
+    public function addTicket(TicketDto $ticket): self
+    {
+        $this->tickets[] = $ticket;
 
         return $this;
     }
@@ -836,6 +914,18 @@ class WebhookDto
     }
 
     /**
+     * @param OptInsDto $optIns
+     *
+     * @return self
+     */
+    public function addOptIns(OptInsDto $optIns): self
+    {
+        $this->tickets[] = $optIns;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getAuthorCommissions(): array
@@ -851,6 +941,18 @@ class WebhookDto
     public function setAuthorCommissions(array $authorCommissions): self
     {
         $this->authorCommissions = $authorCommissions;
+
+        return $this;
+    }
+
+    /**
+     * @param AuthorCommissionDto $authorCommissions
+     *
+     * @return self
+     */
+    public function addAuthorCommissions(AuthorCommissionDto $authorCommissions): self
+    {
+        $this->authorCommissions[] = $authorCommissions;
 
         return $this;
     }
