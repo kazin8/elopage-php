@@ -112,6 +112,7 @@ class ElopageApi
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false );
         curl_setopt($ch, CURLOPT_TIMEOUT, 30 );
         curl_setopt($ch, CURLOPT_ENCODING, "" );
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
         switch ($type) {
             case 'GET':
