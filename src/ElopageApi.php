@@ -33,6 +33,7 @@ class ElopageApi
     protected $baseUrl        = 'https://elopage.com/api/';
     protected $sandboxBaseUrl = 'http://staging.elopage.com/api/';
     protected $testMode       = false;
+    protected $url            = '';
 
     public function __construct(string $apiKey, string $secret, $testMode = false )
     {
@@ -155,6 +156,8 @@ class ElopageApi
                 break;
         }
 
+        $this->url = $url;
+
         curl_setopt($ch, CURLOPT_URL, $url);
 
         $curlResponse = curl_exec($ch);
@@ -244,6 +247,11 @@ class ElopageApi
         ];
 
         return $lang[$this->language][$code] ?? 'Unknown error code';
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
     }
 
 }
