@@ -4,15 +4,13 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Kazin8\Elopage\ElopageApi;
 use Kazin8\Elopage\Exception\ElopageApiException;
 
+$secret = '';
+$apiKey = '';
 
-$secret = 'your-secret';
-$apiKey = 'your-key';
-
-$api = new ElopageApi($apiKey, $secret);
+$api = new ElopageApi($apiKey, $secret, true);
 $api->setLanguage($api::LANG_DE);
 
 $response = $api->get("products");
-
 
 $data = [
     'id' => 5,
@@ -52,5 +50,6 @@ $dto = new \Kazin8\Elopage\Dto\WebhookDto($data);
 if ($response->getSuccess()) {
     print_r($response->getData());
 } else {
+    echo $api->getUrl();
     throw new ElopageApiException($response->getError()->getMessage(), $response->getError()->getCode());
 }
