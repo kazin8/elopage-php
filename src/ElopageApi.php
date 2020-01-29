@@ -30,7 +30,7 @@ class ElopageApi
     protected $apiKey         = '';
     protected $secret         = '';
     protected $language       = '';
-    protected $baseUrl        = 'https://elopage.com/api/';
+    protected $baseUrl        = 'https://api.elopage.com/api/';
     protected $sandboxBaseUrl = 'http://api.staging.elopage.com/api/';
     protected $testMode       = false;
     protected $url            = '';
